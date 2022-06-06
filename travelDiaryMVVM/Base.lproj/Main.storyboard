@@ -8,16 +8,16 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Table View Controller-->
+        <!--Log List Table View Controller-->
         <scene sceneID="Jr8-mj-kA9">
             <objects>
-                <tableViewController id="FS2-HU-AQU" sceneMemberID="viewController">
+                <tableViewController id="FS2-HU-AQU" customClass="LogListTableViewController" customModule="travelDiaryMVVM" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="8pj-LS-jfv">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="1IM-gc-36k" detailTextLabel="qey-cR-IEU" style="IBUITableViewCellStyleValue1" id="bOW-qh-FKY">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="logCell" textLabel="1IM-gc-36k" detailTextLabel="qey-cR-IEU" style="IBUITableViewCellStyleValue1" id="bOW-qh-FKY">
                                 <rect key="frame" x="0.0" y="44.5" width="414" height="43.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="bOW-qh-FKY" id="O04-Gf-x8c">
@@ -41,7 +41,7 @@
                                     </subviews>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <segue destination="6t8-iv-0Ou" kind="show" identifier="segueID" id="pbb-EX-9D1"/>
+                                    <segue destination="6t8-iv-0Ou" kind="show" identifier="toDetailVC" id="pbb-EX-9D1"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -53,7 +53,7 @@
                     <navigationItem key="navigationItem" id="Z0a-QN-cA8">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="O9L-ye-fSr">
                             <connections>
-                                <segue destination="6t8-iv-0Ou" kind="show" id="z2B-eM-sdy"/>
+                                <segue destination="6t8-iv-0Ou" kind="show" identifier="" id="z2B-eM-sdy"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -62,10 +62,10 @@
             </objects>
             <point key="canvasLocation" x="726.08695652173924" y="-117.1875"/>
         </scene>
-        <!--View Controller-->
+        <!--Log Detail View Controller-->
         <scene sceneID="Bs6-Zs-ibF">
             <objects>
-                <viewController id="6t8-iv-0Ou" sceneMemberID="viewController">
+                <viewController id="6t8-iv-0Ou" customClass="LogDetailViewController" customModule="travelDiaryMVVM" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="AWF-q4-J28">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -75,11 +75,10 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="uba-Zb-dWX">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Entry..." textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="uba-Zb-dWX">
                                 <rect key="frame" x="4" y="130" width="406" height="728"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
-                                <color key="textColor" systemColor="labelColor"/>
+                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
@@ -97,8 +96,16 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="xPQ-nd-OkQ">
-                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="grC-WY-vzX"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="grC-WY-vzX">
+                            <connections>
+                                <action selector="saveButtonTapped:" destination="6t8-iv-0Ou" id="7uY-Yf-xhd"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="entryTextView" destination="uba-Zb-dWX" id="UP3-KN-THb"/>
+                        <outlet property="tripNameTextField" destination="Xs7-pU-mQI" id="Rb0-hg-64T"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="F5e-9H-V77" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -127,9 +134,6 @@
         <segue reference="pbb-EX-9D1"/>
     </inferredMetricsTieBreakers>
     <resources>
-        <systemColor name="labelColor">
-            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
